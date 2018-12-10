@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>移动视差效果</title>
+<style>
+
+</style>
+</head>
+<body>
+<script>
+
+	var i;
+	var html;
+	var wrap = document.createElement('div');
+	wrap.className = 'wrap';
+	for (i = 1; i <= 7; i ++) {
+		html += '<div class="layer layer' + i + '" data-distance="' + (-30 + i * 10) + '"></div>';
+	}
+	wrap.innerHTML = html;
+	document.appendChild(wrap);
+</script>
+</body>
+</html>

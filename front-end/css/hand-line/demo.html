@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.wrap {
+			position: relative;
+			width: 200px;
+			height: 200px;
+			margin: 0 20px;
+		}
+
+		.line {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			margin: auto 0;
+			height: 20px;
+			padding: 0;
+			font-size: 0;
+			overflow: hidden;
+			animation: 2s ease-in-out lineright;
+			animation-iteration-count: infinite;
+		}
+
+		.left .line {
+			direction: rtl;
+			animation-name: lineleft;
+		}
+
+		.line > li {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			margin-right: -3px;
+			list-style: none;
+			clip-path: polygon(0 50%, 60% 0, 30% 50%, 60% 100%);
+		}
+
+		.right .line > li {
+			clip-path: polygon(70% 50%, 40% 0, 100% 50%, 40% 100%);
+		}
+
+		.line > li:first-child {
+			width: 3px;
+			background-color: transparent;
+		}
+
+		.move {
+			position: absolute;
+			top: 50%;
+			animation: 2s cubic-bezier(.37,0,.48,.93) moveleft;
+			animation-iteration-count: infinite;
+		}
+
+		.left .move {
+			right: 20px;
+		}
+
+		.right .move {
+			left: 10px;
+			animation-name: moveright;
+		}
+
+		.hand {
+			position: absolute;
+			width: 32px;
+			height: 48px;
+			background-image: url(./hand.png);
+			background-size: contain;
+			z-index: 1;
+		}
+
+		.wave {
+			position: absolute;
+			left: 5px;
+			top: 5px;
+		}
+
+		.wave:after,
+		.wave:before {
+			content: '';
+			position: absolute;
+			display: block;
+			border-radius: 50%;
+		}
+
+		.wave:before {
+			left: -10px;
+			top: -10px;
+			width: 20px;
+			height: 20px;
+			background-color: rgba(140,140,140,.6);
+			animation: 1s ease-in-out smallcircle;
+			animation-iteration-count: infinite;
+		}
+
+		.wave:after {
+			transform: translate(-50%, -50%);
+			width: 36px;
+			height: 36px;
+			border: 1px solid rgba(140,140,140,.4);
+			animation: 2s linear largecircle;
+			animation-iteration-count: infinite;
+		}
+
+		@keyframes lineleft {
+			0% {
+				width: 0;
+				margin-left: 100%;
+			}
+			70% {
+				width: 100%;
+				margin-left: 0;
+			}
+			100% {
+				width: 0;
+				margin-left: 0;
+			}
+		}
+
+		@keyframes lineright {
+			0% {
+				width: 0;
+				margin-left: 0;
+			}
+			70% {
+				width: 100%;
+				margin-left: 0;
+			}
+			100% {
+				width: 0;
+				margin-left: 100%;
+			}
+		}
+
+		@keyframes moveleft {
+			0% {
+				transform: translate(0, 0);
+				opacity: 1;
+			}
+			70% {
+				transform: translate(-180px, 0);
+				opacity: 1;
+			}
+			100% {
+				transform: translate(-180px, 0);
+				opacity: 0;
+			}
+		}
+
+		@keyframes moveright {
+			0% {
+				transform: translate(0, 0);
+				opacity: 1;
+			}
+			70% {
+				transform: translate(180px, 0);
+				opacity: 1;
+			}
+			100% {
+				transform: translate(180px, 0);
+				opacity: 0;
+			}
+		}
+
+		@keyframes smallcircle {
+			0% {
+				transform: scale(1, 1);
+			}
+			50% {
+				transform: scale(0, 0);
+			}
+			100% {
+				transform: scale(1, 1);
+			}
+		}
+
+		@keyframes largecircle {
+			0% {
+				opacity: 0;
+				width: 36px;
+				height: 36px;
+			}
+			50% {
+				opacity: 0;
+				width: 36px;
+				height: 36px;
+			}
+			75% {
+				opacity: 1;
+				width: 44px;
+				height: 44px;
+			}
+			100% {
+				opacity: 0;
+				width: 52px;
+				height: 52px;
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<div class="wrap left">
+		<ul class="line">
+			<li></li>
+			<li style="background-color: rgba(0,0,0,.55);"></li>
+			<li style="background-color: rgba(0,0,0,.6);"></li>
+			<li style="background-color: rgba(0,0,0,.65);"></li>
+			<li style="background-color: rgba(0,0,0,.6);"></li>
+			<li style="background-color: rgba(0,0,0,.7);"></li>
+			<li style="background-color: rgba(0,0,0,.75);"></li>
+			<li style="background-color: rgba(0,0,0,.8);"></li>
+			<li style="background-color: rgba(0,0,0,.85);"></li>
+			<li style="background-color: rgba(0,0,0,.9);"></li>
+			<li style="background-color: rgba(0,0,0,.95);"></li>
+			<li style="background-color: rgba(0,0,0,1);"></li>
+		</ul>
+		<div class="move">
+			<div class="wave"></div>
+			<div class="hand"></div>
+		</div>
+	</div>
+	<div class="wrap right">
+		<ul class="line">
+			<li></li>
+			<li style="background-color: rgba(0,0,0,.55);"></li>
+			<li style="background-color: rgba(0,0,0,.6);"></li>
+			<li style="background-color: rgba(0,0,0,.65);"></li>
+			<li style="background-color: rgba(0,0,0,.6);"></li>
+			<li style="background-color: rgba(0,0,0,.7);"></li>
+			<li style="background-color: rgba(0,0,0,.75);"></li>
+			<li style="background-color: rgba(0,0,0,.8);"></li>
+			<li style="background-color: rgba(0,0,0,.85);"></li>
+			<li style="background-color: rgba(0,0,0,.9);"></li>
+			<li style="background-color: rgba(0,0,0,.95);"></li>
+			<li style="background-color: rgba(0,0,0,1);"></li>
+		</ul>
+		<div class="move">
+			<div class="wave"></div>
+			<div class="hand"></div>
+		</div>
+	</div>
+</body>
+</html>
