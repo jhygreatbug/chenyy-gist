@@ -1,15 +1,10 @@
 const RESULT_KEYWORDS = ['win', 'draw', 'loss'];
 const RESULT_NAME_MAP = {
-  'win': 'W',
-  'draw': 'D',
-  'loss': 'L',
+  win: 'W',
+  draw: 'D',
+  loss: 'L',
 };
-const RESULT_POINT_MAP = {
-  'win': 3,
-  'draw': 1,
-  'loss': 0,
-};
-const COLS = ['MP', 'W', 'D', 'L', 'P'];
+
 module.exports = function tournament(list) {
   const competitions = list.split('\n');
   const teamMap = {};
@@ -20,22 +15,20 @@ module.exports = function tournament(list) {
         W: 0,
         D: 0,
         L: 0,
-        P: 0,
       };
     }
     const teamPoint = teamMap[team];
     teamPoint.MP++;
     teamPoint[RESULT_NAME_MAP[result]]++;
-    teamPoint.P += RESULT_POINT_MAP[result];
   }
   function format() {
-
     const teamResults = Object.keys(teamMap).map(key => {
       const teamResult = teamMap[key];
       teamResult.Team = key;
+      teamResult.P = teamResult.W * 3 + teamResult.D;
       return teamResult;
     });
-    teamResults.sort((a, b) => a.P < b.P ? 1 : -1);
+    teamResults.sort((a, b) => (a.P < b.P ? 1 : -1));
 
     let maxTeamLen = 0;
     let maxCol = {
@@ -44,7 +37,7 @@ module.exports = function tournament(list) {
       D: 0,
       L: 0,
       P: 0,
-    }
+    };
     teamResults.forEach(result => {
       maxTeamLen = Math.max(maxTeamLen, result.Team.length);
       for (const col in maxCol) {
